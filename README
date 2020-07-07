@@ -1,1 +1,4 @@
 用来加速部分不能使用公用加速服务加速的docker镜像
+
+2020.07.07
+更新mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04
