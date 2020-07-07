@@ -1,0 +1,23 @@
+name: mssql
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: checkout
+      uses: actions/checkout@master
+
+    - name: login private registry
+      uses: Azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY}}
+        username: ${{ secrets.REGISTRY_USER }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+
+    - name: mssql-2019-CU
+      run: |
+        docker pull mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04
+        docker tag mcr.microsoft.com/mssql/server:2019-CU5-ubuntu-16.04 ccr.ccs.tencentyun.com/darwinist-acc/mssql:2019-CU5-ubuntu-16.04
+        docker push ccr.ccs.tencentyun.com/darwinist-acc/mssql:2019-CU5-ubuntu-16.04
+
